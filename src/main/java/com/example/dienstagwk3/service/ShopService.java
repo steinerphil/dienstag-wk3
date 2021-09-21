@@ -4,6 +4,9 @@ import com.example.dienstagwk3.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ShopService {
 
@@ -17,10 +20,6 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
-    //empty constructor
-//    public ShopService() {
-//    }
-
     public void getProduct(int id){
         try {
             System.out.println(productRepo.getProduct(id).getName());
@@ -29,12 +28,13 @@ public class ShopService {
         }
     }
 
-    public void listProducts(){
-        try {
-            System.out.println(productRepo.list());
-        } catch (Exception e) {
-            e.printStackTrace();
+    public List<ProductInterface> listProducts(){
+
+        List<ProductInterface> listOfProducts = new ArrayList<>();
+        for (int i = 0; i < productRepo.list().size(); i++) {
+            listOfProducts.add(productRepo.list().get(i+1));
         }
+        return listOfProducts;
     }
 
     // add order and build product array from that
