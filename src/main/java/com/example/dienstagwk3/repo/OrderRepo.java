@@ -15,14 +15,6 @@ public class OrderRepo {
     private int orderNumber = 0;
     private final ProductRepo productRepo = new ProductRepo();
 
-    //constructors
-    public OrderRepo(HashMap<Integer, Order> orders) {
-        this.orders = orders;
-    }
-
-    public OrderRepo() {
-    }
-
     //methods
     @Override
     public String toString() {
@@ -36,7 +28,7 @@ public class OrderRepo {
         ) {
             r.append((p.getName())).append(", ");
         }
-        r.delete(r.length()-2, r.length()); //removing last comma
+        r.delete(r.length() - 2, r.length()); //removing last comma
         return r.toString();
     }
 
@@ -48,28 +40,17 @@ public class OrderRepo {
         ) {
             r.append((p.getName())).append(", ");
         }
-        r.delete(r.length()-2, r.length()); // removing last comma
+        r.delete(r.length() - 2, r.length()); // removing last comma
         r.append(" was added. Your order Number: " + orderNumber);
         return r.toString();
     }
 
-    public String list() {
-        ProductInterface[] productArray = new ProductInterface[orders.size()];
-        StringBuilder stringBuilder = new StringBuilder();
-        if (orders.size() == 0) {
-            stringBuilder.append("List is empty");
-        } else {
-//            StringBuilder mapAsString = new StringBuilder();
-            for (Integer key : orders.keySet()) {
-                stringBuilder.append("Order-ID: " + key + " = ");
-                for (ProductInterface pr: orders.get(key).getProduct()) {
-                    stringBuilder.append(pr.getName()).append(", ");
-                }
-                stringBuilder.delete(stringBuilder.length()-2, stringBuilder.length());
-                stringBuilder.append("\n");
-            }
+    public List<Order> list() {
+        List<Order> ordersAsList = new ArrayList<>();
+        for (Integer key : orders.keySet()) {
+            ordersAsList.add(orders.get(key));
         }
-        return stringBuilder.toString();
+        return ordersAsList;
     }
 
 }

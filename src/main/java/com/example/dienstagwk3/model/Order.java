@@ -2,17 +2,17 @@ package com.example.dienstagwk3.model;
 
 public class Order {
 
-    int id;
+    int orderId;
     ProductInterface[] product;
 
 
-    public Order(int id, ProductInterface[] product) {
-        this.id = id;
+    public Order(int orderId, ProductInterface[] product) {
+        this.orderId = orderId;
         this.product = product;
     }
 
     public int getId() {
-        return id;
+        return orderId;
     }
 
     public ProductInterface[] getProduct() {

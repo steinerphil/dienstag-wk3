@@ -28,5 +28,14 @@ public class ProductRepo {
         return (products.get(id));
     }
 
+    public ProductInterface getByName(String name){
+        ProductInterface result = null;
+        for (Integer key: products.keySet()
+             ) {
+            if (products.get(key).getName().equalsIgnoreCase(name)){
+                result = products.get(key);}
+        }
+        return result;
+    }
 
 }

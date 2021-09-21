@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("shop")
+@RequestMapping("product")
 public class ProductController {
 
     private final ShopService shopService;
@@ -24,44 +24,21 @@ public class ProductController {
         this.shopService = shopService;
     }
 
-    @GetMapping
-    public List<ProductInterface> getProduct(@RequestParam Optional<Integer> id){
+    @GetMapping("{id}")
+    public List<ProductInterface> getProduct(@PathVariable Optional<Integer> id){
         if(id.isPresent()) {
             return shopService.getProduct(id.get());
         }
       return  shopService.listProducts();
     }
 
-    @PutMapping
-    public ResponseEntity<String> orderProducts(@RequestBody Optional<Integer[]> ids){
-        try {
-            if (ids.isPresent()){
-                int[] intArray = new int[ids.get().length];
-                Integer[] integers = ids.get();
-                for (int i = 0; i < ids.get().length; i++) {
-                    intArray[i] = integers[i];
-                }
-               return new ResponseEntity<>(shopService.addOrder(intArray), HttpStatus.ACCEPTED);
-            }
-            else{
-            return new ResponseEntity<>("No IDs in request body", HttpStatus.NOT_FOUND);}
-        } catch (Exception e) {
-            return new ResponseEntity<>("ERROR, wrong Data", HttpStatus.NOT_FOUND);
-        }
-    }
-
-//    @GetMapping("{id}")
-//    public ResponseEntity<String> getOrder(@PathVariable int id){
-//        try {
-//            return new ResponseEntity<>(shopService.getOrder(id), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>("Can not find order", HttpStatus.NOT_FOUND);
-//        }
-//    }
-
     @GetMapping
-    public List<String> getOrders(){
-        return shopService.listOrders();
+    public ResponseEntity<ProductInterface> getProductByName(@RequestParam String name){
+        try {
+           return new ResponseEntity<>(shopService.getProductByName(name), HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

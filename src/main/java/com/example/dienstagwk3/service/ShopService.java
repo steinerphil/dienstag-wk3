@@ -32,12 +32,15 @@ public class ShopService {
     }
 
     public List<ProductInterface> listProducts(){
-
         List<ProductInterface> listOfProducts = new ArrayList<>();
         for (int i = 0; i < productRepo.list().size(); i++) {
             listOfProducts.add(productRepo.list().get(i+1));
         }
         return listOfProducts;
+    }
+
+    public ProductInterface getProductByName(String name){
+        return productRepo.getByName(name);
     }
 
     // add order and build product array from that
@@ -54,9 +57,8 @@ public class ShopService {
             return "Order " + orderNumber + " contains " + orderRepo.getProductToOrder(orderNumber);
     }
 
-    public List<String> listOrders(){
-            return List.of(orderRepo.list());
-
+    public List<Order> listOrders(){
+            return orderRepo.list();
     }
 
 }
