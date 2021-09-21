@@ -29,10 +29,8 @@ public class OrderRepo {
         return "order= " + orders;
     }
 
-    public String getProductToOrder(int orderNumber) throws CanNotFindProduct {
-        if (!orders.containsKey(orderNumber)) {
-            throw new CanNotFindProduct("Error: can not find product to given order-number: " + orderNumber);
-        }
+
+    public String getProductToOrder(int orderNumber) {
         StringBuilder r = new StringBuilder();
         for (ProductInterface p : orders.get(orderNumber).getProduct()
         ) {

@@ -24,11 +24,8 @@ public class ProductRepo {
        return products;
     }
 
-    public ProductInterface getProduct(int id) throws CanNotFindProduct {
-        if(!products.containsKey(id)){
-            throw new CanNotFindProduct("The product does not exist. Product id: " + id);
-        }
-        return products.get(id);
+    public ProductInterface getProduct(int id) {
+        return (products.get(id));
     }
 
 

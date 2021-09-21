@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShopService {
@@ -20,12 +21,14 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
-    public void getProduct(int id){
+    public List<ProductInterface> getProduct(int id){
+        ProductInterface result = null;  //TODO dies geht sauberer
         try {
-            System.out.println(productRepo.getProduct(id).getName());
+         result = productRepo.getProduct(id);
         } catch (Exception e) {
-            e.printStackTrace();
+           e.printStackTrace();
         }
+        return List.of(result);
     }
 
     public List<ProductInterface> listProducts(){
@@ -39,34 +42,21 @@ public class ShopService {
 
     // add order and build product array from that
     // add th product array to orderRepo
-    public void addOrder(int[] productToOrder){
-        try {
+    public String addOrder(int[] productToOrder){
             ProductInterface[] productsArray = new ProductInterface[productToOrder.length];
             for(int i = 0; i < productToOrder.length; i++){
                 productsArray[i] = productRepo.getProduct(productToOrder[i]);
             }
-            //sout for display massage from add() method in order repo
-            System.out.println(orderRepo.add(productsArray));
-            }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+            return orderRepo.add(productsArray);
     }
 
-    public void getOrder(int orderNumber){
-        try {
-            System.out.println("Order " + orderNumber + " contains " + orderRepo.getProductToOrder(orderNumber));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String getOrder(int orderNumber){
+            return "Order " + orderNumber + " contains " + orderRepo.getProductToOrder(orderNumber);
     }
 
-    public void listOrders(){
-        try {
-            System.out.println(orderRepo.list());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public List<String> listOrders(){
+            return List.of(orderRepo.list());
+
     }
 
 }
