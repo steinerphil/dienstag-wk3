@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("shop")
+@RequestMapping("order")
 public class OrderController {
 
     private final ShopService shopService;
@@ -51,6 +51,15 @@ public class OrderController {
     @GetMapping
     public List<Order> getOrders(){
         return shopService.listOrders();
+    }
+
+    @DeleteMapping("{orderId}")
+    public ResponseEntity<String> deleteOrder(@PathVariable int orderId){
+        try {
+            return ResponseEntity.ok(shopService.cancelOrder(orderId));
+        } catch (Exception e) {
+            return new ResponseEntity<>("orderId does not match to order list.", HttpStatus.NOT_FOUND);
+        }
     }
 
 }

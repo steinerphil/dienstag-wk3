@@ -3,10 +3,9 @@ import com.example.dienstagwk3.repo.*;
 import com.example.dienstagwk3.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ShopService {
@@ -59,6 +58,10 @@ public class ShopService {
 
     public List<Order> listOrders(){
             return orderRepo.list();
+    }
+
+    public String cancelOrder(int orderId){
+            return "delete order with id " + orderId;
     }
 
 }

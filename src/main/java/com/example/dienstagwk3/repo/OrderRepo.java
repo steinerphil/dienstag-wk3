@@ -52,4 +52,8 @@ public class OrderRepo {
         return ordersAsList;
     }
 
+    public Order deleteOrder(int orderId){
+        return orders.remove(orderId);
+    }
+
 }
