@@ -1,7 +1,6 @@
 package com.example.dienstagwk3.repo;
 
 import com.example.dienstagwk3.model.*;
-import com.example.dienstagwk3.exception.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
